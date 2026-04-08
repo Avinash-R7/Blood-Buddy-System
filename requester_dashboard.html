@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Request Blood | Smart Blood</title>
+<link rel="stylesheet" href="/static/style.css">
+<!-- Preload Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+
+<body class="bg-image">
+<div class="bg-overlay"></div>
+
+<nav class="navbar">
+    <h2><span class="icon">🩸</span> Smart Blood</h2>
+    <div style="display: flex; gap: 15px; align-items: center;">
+        <a href="/profile/{{user}}" class="user-badge" style="text-decoration: none; color: inherit; display: inline-block;">👤 {{user}}</a>
+        <a href="/" style="color: var(--text-muted); text-decoration: none; font-size: 14px; margin-left: 10px;">Logout</a>
+    </div>
+</nav>
+
+<div class="container">
+    <div id="toast-container"></div>
+    
+    <div class="dashboard-grid">
+        <!-- Main Form Column -->
+        <div class="card">
+            <h3>Broadcast Urgent Request</h3>
+            
+            <div class="form-row">
+                <div class="input-group">
+                    <label>Blood Group Needed</label>
+                    <input id="blood" placeholder="e.g. O+, A-">
+                </div>
+                <div class="input-group">
+                    <label>Urgency Level</label>
+                    <select id="urgency">
+                        <option value="normal">Standard Delivery</option>
+                        <option value="critical">Critical Emergency</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Location Area / Pin Code</label>
+                <input id="location" placeholder="e.g. 10001 or City Hospital" required>
+            </div>
+
+            <button class="primary-btn" onclick="sendRequest('{{user}}')">
+                <span>🚀 Broadcast to Network</span>
+            </button>
+            
+            <div style="margin-top: 40px; border-top: 1px solid var(--glass-border); padding-top: 20px;">
+                <h3>Status Tracker</h3>
+                <div id="status" class="waiting mt-10">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="spin-icon" style="animation: none; opacity: 0.5;"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    Ready to launch request...
+                </div>
+            </div>
+        </div>
+
+        <!-- Matches Sidebar -->
+        <div class="card" style="display: flex; flex-direction: column;">
+            <h3>Top Matched Donors</h3>
+            <ul id="results" style="flex: 1;">
+                <div class="empty-state" style="margin-top: 40px;">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0.3; margin-bottom: 15px;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg><br>
+                    No matches yet.<br>Submit a request to trigger the Smart Match algorithm.
+                </div>
+            </ul>
+            
+            <div style="margin-top: 25px; border-top: 1px solid var(--glass-border); padding-top: 20px;">
+                <h4 style="color: var(--text-muted); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;">Request History</h4>
+                <ul style="max-height: 120px; overflow-y: auto; padding-right: 5px;">
+                    {% for h in user_data.history %}
+                        <li style="padding: 10px; margin-bottom: 8px; font-size: 13px; color: #eee; display: flex; align-items: center; gap: 10px;">
+                            <span style="display: inline-block; width: 6px; height: 6px; background: var(--warning); border-radius: 50%;"></span>
+                            {{ h }}
+                        </li>
+                    {% else %}
+                        <div class="empty-state" style="padding: 10px; text-align: left;">No past requests found.</div>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/static/script.js"></script>
+<script>
+trackStatus("{{user}}");
+</script>
+
+<style>
+@keyframes spin { 100% { transform: rotate(360deg); } }
+.spin-icon { animation: spin 4s linear infinite; opacity: 0.7; }
+</style>
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile | Smart Blood</title>
+<link rel="stylesheet" href="/static/style.css">
+<!-- Preload Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+
+<body class="bg-image">
+<div class="bg-overlay"></div>
+
+<nav class="navbar">
+    <a href="{{ '/donor/' + user if user_data.role == 'donor' else '/requester/' + user }}" style="text-decoration: none;">
+        <h2><span class="icon">🩸</span> Smart Blood</h2>
+    </a>
+    <div style="display: flex; gap: 15px; align-items: center;">
+        <span class="badge {{ user_data.badge.lower() if user_data.badge else 'available' }}" style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); color: #fff;">
+            👤 {{user}}
+        </span>
+        <a href="/" style="color: var(--text-muted); text-decoration: none; font-size: 14px; margin-left: 10px;">Logout</a>
+    </div>
+</nav>
+
+<div class="container" style="max-width: 600px;">
+    <div class="card" style="margin-top: 20px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 25px;">
+            <h3>User Profile Information</h3>
+            <a href="{{ '/donor/' + user if user_data.role == 'donor' else '/requester/' + user }}" class="badge" style="text-decoration: none; background: rgba(0,0,0,0.4); border: 1px solid var(--glass-border); color: #fff;">
+                ← Back to Dashboard
+            </a>
+        </div>
+        
+        <div style="background: rgba(0,0,0,0.2); border-radius: 12px; padding: 20px; border: 1px solid var(--glass-border);">
+            
+            <div style="display: flex; flex-direction: column; gap: 15px;">
+                <div style="display: flex; justify-content: space-between; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                    <span style="color: var(--text-muted); font-size: 14px;">Full Name</span>
+                    <strong style="color: #fff; font-size: 15px;">{{ user_data.name }}</strong>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                    <span style="color: var(--text-muted); font-size: 14px;">Email Address</span>
+                    <strong style="color: #fff; font-size: 15px;">{{ user_data.email }}</strong>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                    <span style="color: var(--text-muted); font-size: 14px;">Phone Number</span>
+                    <strong style="color: #fff; font-size: 15px;">{{ user_data.phone }}</strong>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                    <span style="color: var(--text-muted); font-size: 14px;">Blood Group</span>
+                    <strong style="color: var(--primary-red); font-size: 16px;">{{ user_data.blood_group }}</strong>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                    <span style="color: var(--text-muted); font-size: 14px;">Location / Pincode</span>
+                    <strong style="color: #fff; font-size: 15px;">{{ user_data.location }}</strong>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                    <span style="color: var(--text-muted); font-size: 14px;">Account Role</span>
+                    <strong style="color: #fff; font-size: 15px; text-transform: capitalize;">{{ user_data.role }}</strong>
+                </div>
+
+                {% if user_data.role == 'donor' %}
+                <div style="display: flex; justify-content: space-between;">
+                    <span style="color: var(--text-muted); font-size: 14px;">Current Badge Tier</span>
+                    <span class="badge {{ user_data.badge.lower() if user_data.badge else 'bronze' }}">🏅 {{ user_data.badge }}</span>
+                </div>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<style>
+.user-badge:hover {
+    background: rgba(255,255,255,0.2) !important;
+}
+</style>
+
+</body>
+</html>

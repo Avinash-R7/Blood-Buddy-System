@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal | Smart Blood</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <!-- Preload Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+
+<body class="bg-image">
+    <div class="bg-overlay"></div>
+
+    <div class="page-center">
+        <div class="glass-card">
+
+            <h1><span class="title-icon">🩸</span> Smart Blood</h1>
+            <p class="subtitle" id="auth-subtitle">Welcome back to the intelligent blood network</p>
+
+            <div class="form-tabs">
+                <button type="button" class="tab-btn active" id="tab-login" onclick="toggleAuth('login')">Login</button>
+                <button type="button" class="tab-btn" id="tab-signup" onclick="toggleAuth('signup')">Sign Up</button>
+            </div>
+
+            <!-- LOGIN FORM -->
+            <form id="form-login" action="/login" method="POST">
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" name="email" placeholder="example@domain.com" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" name="password" placeholder="Your secure password" required>
+                </div>
+
+                <button class="primary-btn">
+                    <span>Login Securely</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+            </form>
+
+            <!-- SIGNUP FORM -->
+            <form id="form-signup" action="/register" method="POST" style="display: none;">
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input name="name" placeholder="Enter your full name" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="input-group">
+                        <label>Email Address</label>
+                        <input type="email" name="email" placeholder="Email" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Phone Number</label>
+                        <input type="tel" name="phone" placeholder="Phone" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" name="password" placeholder="Create a password" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="input-group">
+                        <label>Select Role</label>
+                        <select name="role">
+                            <option value="donor">I want to be a Donor</option>
+                            <option value="requester">I need to Request Blood</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Blood Group</label>
+                        <input name="blood" placeholder="e.g. O+, A-, B+" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Area / Pincode</label>
+                    <input name="location" placeholder="e.g. 10001 or City District" required>
+                </div>
+
+                <button class="primary-btn">
+                    <span>Create Profile</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="8.5" cy="7" r="4"></circle>
+                        <line x1="20" y1="8" x2="20" y2="14"></line>
+                        <line x1="23" y1="11" x2="17" y2="11"></line>
+                    </svg>
+                </button>
+            </form>
+
+        </div>
+    </div>
+    
+    <script src="/static/script.js"></script>
+</body>
+
+</html>
